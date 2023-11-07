@@ -5,6 +5,27 @@ const fun_handled_messages = require('../helpers/fun_handled_messages');
 var langTitle = ""
 //#endregion
 
+//#region Create Logger
+const winston = require('winston');
+
+const logLevels = {
+    fatal: 0,
+    error: 1,
+    warn: 2,
+    info: 3,
+    debug: 4,
+    trace: 5,
+  };
+  
+  const logger = winston.createLogger({
+    levels: logLevels,
+    level: process.env.LOG_LEVEL || 'info',
+    format: winston.format.json(),
+    transports: [new winston.transports.Console()],
+  });
+//#endregion
+  
+
 
 exports.get_All_User =  async(req, res) => {
     try {
